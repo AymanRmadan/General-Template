@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Database\" />
-    <Folder Include="Entities\" />
     <Folder Include="Enums\" />
-    <Folder Include="StoredProcedure\" />
-    <Folder Include="NewFolder\" />
+    <Folder Include="StoredProcedures\" />
     <Folder Include="Repository\Abstractions\" />
     <Folder Include="Repository\Implementations\" />
   </ItemGroup>

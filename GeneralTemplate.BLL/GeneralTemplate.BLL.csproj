@@ -8,8 +8,8 @@
 
   <ItemGroup>
     <Folder Include="DTOS\" />
-    <Folder Include="Mapper\" />
-    <Folder Include="Helper\" />
+    <Folder Include="Mappers\" />
+    <Folder Include="Helpers\" />
     <Folder Include="Services\Abstractions\" />
     <Folder Include="Services\Implementations\" />
   </ItemGroup>
