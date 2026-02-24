@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\GeneralTemplate.BLL\GeneralTemplate.BLL.csproj" />
   </ItemGroup>
 

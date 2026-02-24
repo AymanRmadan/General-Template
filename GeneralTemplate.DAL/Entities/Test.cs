@@ -1,6 +1,6 @@
 ﻿namespace GeneralTemplate.DAL.Entities
 {
-    public class Test : Base
+    public class Test : BaseEntity
     {
         public Test()
         {

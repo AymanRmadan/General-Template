@@ -1,5 +1,4 @@
-﻿
-using GeneralTemplate.DAL.Database;
+﻿using GeneralTemplate.DAL.Repository.Implementations;
 
 namespace GeneralTemplate.DAL
 {
@@ -9,6 +8,8 @@ namespace GeneralTemplate.DAL
         {
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             return services;
         }

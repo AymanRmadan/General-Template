@@ -1,6 +1,6 @@
 ﻿namespace GeneralTemplate.DAL.Entities
 {
-    public class Base
+    public class BaseEntity
     {
         public int Id { get; private set; }
         public DateTime CreatedOn { get; private set; } = DateTime.Now;
