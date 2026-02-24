@@ -1,9 +1,16 @@
+using GeneralTemplate.BLL;
+using GeneralTemplate.DAL;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+
+builder.Services.AddBLL();
+builder.Services.AddDAL(builder.Configuration);
+
+
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();

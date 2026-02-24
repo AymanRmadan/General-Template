@@ -1,10 +1,8 @@
-﻿
-
-namespace GeneralTemplate.DAL.Database
+﻿namespace GeneralTemplate.DAL.Database
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext()
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
