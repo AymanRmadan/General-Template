@@ -9,7 +9,15 @@
             _repo = repo;
         }
 
-        public async Task<IEnumerable<Test>> GetAllAsync()
-            => await _repo.GetAllAsync();
+        public async Task<Result<IEnumerable<Test>>> GetAllAsync()
+        {
+            var result = await _repo.GetAllAsync();
+            if (result == null)
+                return Result.Failure<IEnumerable<Test>>(TestErrors.InvalidCredentials);
+
+            return Result.Success(result);
+
+        }
+
     }
 }

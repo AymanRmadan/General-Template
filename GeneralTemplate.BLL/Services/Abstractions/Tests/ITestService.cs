@@ -2,6 +2,6 @@
 {
     public interface ITestService
     {
-        Task<IEnumerable<Test>> GetAllAsync();
+        Task<Result<IEnumerable<Test>>> GetAllAsync();
     }
 }

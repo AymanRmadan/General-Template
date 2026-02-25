@@ -16,6 +16,12 @@ namespace GeneralTemplate.PL.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Get()
-            => Ok(await _testService.GetAllAsync());
+        {
+            var result = await _testService.GetAllAsync();
+            //return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
+            return result.IsSuccess ? Ok(result.Value)
+                : Problem(statusCode: StatusCodes.Status400BadRequest, title: result.Error.Code, detail: result.Error.Description);
+        }
+
     }
 }
