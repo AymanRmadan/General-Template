@@ -13,5 +13,6 @@ namespace GeneralTemplate.DAL
 
             return services;
         }
+
     }
 }

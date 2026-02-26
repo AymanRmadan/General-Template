@@ -1,15 +1,16 @@
 using GeneralTemplate.BLL;
 using GeneralTemplate.DAL;
+using GeneralTemplate.PL;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
 
 builder.Services.AddControllers();
-
 builder.Services.AddBLL();
 builder.Services.AddDAL(builder.Configuration);
+builder.Services.AddPL(builder.Configuration);
 
 
 #region Swagger
@@ -19,7 +20,7 @@ builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "SurveyBasket API",
+                    Title = "General Template API",
                     Version = "v1"
                 });
 
@@ -66,7 +67,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-// app.MapGet("/", () => Results.Redirect("/swagger"));
 
 app.Run();
