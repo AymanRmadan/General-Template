@@ -1,23 +1,35 @@
 ﻿
-
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-
 namespace GeneralTemplate.BLL
 {
     public static class BLLDependencyInjection
     {
 
-        public static IServiceCollection AddBLL(this IServiceCollection services)
+        public static IServiceCollection AddBLL(this IServiceCollection services, IConfiguration configuration)
         {
-            //  services.AddScoped(typeof(IService<>), typeof(GenericService<>));
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IAuthService, AuthService>();
-
             services.AddScoped<IJwtProvider, JwtProvider>();
 
 
+            services.AddAuthConfig(configuration);
 
+
+            return services;
+        }
+
+
+
+
+        private static IServiceCollection AddAuthConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+            // services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
+            services.AddOptions<JwtOptions>()
+                  .BindConfiguration("Jwt")
+                  .ValidateDataAnnotations()
+                  .ValidateOnStart();
+
+
+            var jwtSetting = configuration.GetSection("Jwt").Get<JwtOptions>();
 
             services.AddAuthentication(options =>
             {
@@ -31,11 +43,11 @@ namespace GeneralTemplate.BLL
                    {
                        ValidateIssuerSigningKey = true,
                        ValidateIssuer = true,
-                       // ValidIssuer = jwtSetting?.Issuer,
+                       ValidIssuer = jwtSetting?.Issuer,
                        ValidateAudience = true,
-                       // ValidAudience = jwtSetting?.Audience,
+                       ValidAudience = jwtSetting?.Audience,
                        ValidateLifetime = true,
-                       // IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting?.Key!)),
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSetting?.Key!)),
 
                    };
                }
@@ -44,8 +56,6 @@ namespace GeneralTemplate.BLL
 
             return services;
         }
-
-
     }
 
 }

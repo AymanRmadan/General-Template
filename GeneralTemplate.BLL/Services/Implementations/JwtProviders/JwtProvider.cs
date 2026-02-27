@@ -1,13 +1,13 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
-
-namespace GeneralTemplate.BLL.Services.Implementations.JwtProviders;
+﻿namespace GeneralTemplate.BLL.Services.Implementations.JwtProviders;
 
 public class JwtProvider : IJwtProvider
 {
-    //private readonly JwtOptions _options = options.Value;
+    private readonly JwtOptions _options;
+
+    public JwtProvider(IOptions<JwtOptions> options)
+    {
+        _options = options.Value;
+    }
 
     public (string token, int expiresIn) GenerateToken(ApplicationUser user)//, IEnumerable<string> roles, IEnumerable<string> permissions)
     {
@@ -21,19 +21,19 @@ public class JwtProvider : IJwtProvider
           //  new(nameof(permissions), JsonSerializer.Serialize(permissions), JsonClaimValueTypes.JsonArray)
         ];
 
-        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("9OlzQxYp37ZQmtsD0TDxmGI3hKqysY76"));
+        var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_options.Key));
 
         var singingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
-             issuer: "My Application Name",
-             audience: "My Application Audience",
+             issuer: _options.Issuer,
+             audience: _options.Audience,
             claims: claims,
-             expires: DateTime.UtcNow.AddMinutes(60),
+             expires: DateTime.UtcNow.AddMinutes(_options.ExpiryMinutes),
             signingCredentials: singingCredentials
         );
 
-        return (token: new JwtSecurityTokenHandler().WriteToken(token), expiresIn: 60);// _options.ExpiryMinutes * 60);
+        return (token: new JwtSecurityTokenHandler().WriteToken(token), expiresIn: _options.ExpiryMinutes * 60);
     }
 
     /*  public string? ValidateToken(string token)

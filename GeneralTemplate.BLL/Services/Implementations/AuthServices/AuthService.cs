@@ -13,9 +13,6 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
         }
 
 
-
-
-
         public async Task<Result<AuthResponse>> GetTokenAsync(string email, string password, CancellationToken cancellationToken = default)
         {
             if (await _userManager.FindByEmailAsync(email) is not { } user)

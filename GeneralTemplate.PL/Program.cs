@@ -1,56 +1,18 @@
 using GeneralTemplate.BLL;
 using GeneralTemplate.DAL;
 using GeneralTemplate.PL;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 
 builder.Services.AddControllers();
-builder.Services.AddBLL();
+builder.Services.AddBLL(builder.Configuration);
 builder.Services.AddDAL(builder.Configuration);
 builder.Services.AddPL(builder.Configuration);
 
 
-#region Swagger
-// Swagger
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-            {
-                options.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Title = "General Template API",
-                    Version = "v1"
-                });
 
-
-                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                {
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
-                    In = ParameterLocation.Header,
-                    Description = "Enter 'Bearer' followed by your JWT token (e.g., Bearer eyJhbGciOi...)."
-                });
-
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-        {
-            {
-                new OpenApiSecurityScheme
-                {
-                    Reference = new OpenApiReference
-                    {
-                        Type = ReferenceType.SecurityScheme,
-                        Id = "Bearer"
-                    }
-                },
-                Array.Empty<string>()
-            }
-        });
-            });
-#endregion
 
 
 var app = builder.Build();
@@ -63,6 +25,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
