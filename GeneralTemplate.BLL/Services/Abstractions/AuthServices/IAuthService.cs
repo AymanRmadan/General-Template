@@ -1,4 +1,6 @@
-﻿namespace GeneralTemplate.BLL.Services.Abstractions.AuthServices
+﻿using GeneralTemplate.BLL.Commons.ErrorsHandling;
+
+namespace GeneralTemplate.BLL.Services.Abstractions.AuthServices
 {
     public interface IAuthService
     {

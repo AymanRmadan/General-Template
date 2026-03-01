@@ -1,4 +1,6 @@
-﻿namespace GeneralTemplate.BLL.Services.Implementations.Tests
+﻿using GeneralTemplate.BLL.Commons.ErrorsHandling;
+
+namespace GeneralTemplate.BLL.Services.Implementations.Tests
 {
     public class TestService : ITestService
     {

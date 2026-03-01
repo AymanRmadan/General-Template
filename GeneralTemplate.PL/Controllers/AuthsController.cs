@@ -1,7 +1,4 @@
-﻿using GeneralTemplate.BLL.DTOS.Authentications.Requests;
-using GeneralTemplate.BLL.DTOS.Logins.Request;
-using GeneralTemplate.BLL.Services.Abstractions.AuthServices;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
 namespace GeneralTemplate.PL.Controllers
 {
@@ -20,7 +17,7 @@ namespace GeneralTemplate.PL.Controllers
         {
             var authResult = await _authService.GetTokenAsync(request.Email, request.Password, cancellationToken);
 
-            return authResult.IsSuccess ? Ok(authResult.Value) : BadRequest();//: authResult.ToProblem();
+            return authResult.IsSuccess ? Ok(authResult.Value) : authResult.ToProblem();
 
             //return authResult.Match(
             //    Ok,
@@ -34,7 +31,7 @@ namespace GeneralTemplate.PL.Controllers
         {
             var authResult = await _authService.GetRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
 
-            return authResult.IsSuccess ? Ok(authResult.Value) : BadRequest("Invalid Token"); //authResult.ToProblem();
+            return authResult.IsSuccess ? Ok(authResult.Value) : authResult.ToProblem();
         }
 
         [HttpPost("revoke-refresh-token")]
@@ -42,7 +39,7 @@ namespace GeneralTemplate.PL.Controllers
         {
             var result = await _authService.RevokeRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
 
-            return result.IsSuccess ? Ok() : BadRequest();//result.ToProblem();
+            return result.IsSuccess ? Ok() : result.ToProblem();
         }
     }
 }

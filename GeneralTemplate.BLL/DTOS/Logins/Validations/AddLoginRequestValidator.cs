@@ -1,5 +1,4 @@
-﻿/*using FluentValidation;
-using SurveyBasket.Contracts.Logins.Request;
+﻿using GeneralTemplate.BLL.DTOS.Logins.Request;
 
 namespace SurveyBasket.Contracts.Validations
 {
@@ -7,12 +6,11 @@ namespace SurveyBasket.Contracts.Validations
     {
         public AddLoginRequestValidator()
         {
-            RuleFor(r => r.email).NotEmpty().EmailAddress();
-            RuleFor(r => r.password).NotEmpty();
+            RuleFor(r => r.Email).NotEmpty().EmailAddress();
+            RuleFor(r => r.Password).NotEmpty();
 
 
         }
 
     }
 }
-*/

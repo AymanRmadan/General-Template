@@ -1,4 +1,5 @@
 ﻿
+using GeneralTemplate.BLL.Commons.ErrorsHandling;
 using System.Security.Cryptography;
 
 namespace GeneralTemplate.BLL.Services.Implementations.AuthServices

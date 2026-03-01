@@ -1,4 +1,6 @@
-﻿namespace GeneralTemplate.BLL.Commons.Errors;
+﻿using GeneralTemplate.BLL.Commons.ErrorsHandling;
+
+namespace GeneralTemplate.BLL.Commons.Errors;
 
 public record UserErrors
 {

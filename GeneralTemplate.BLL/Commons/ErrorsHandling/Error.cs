@@ -1,4 +1,4 @@
-﻿namespace GeneralTemplate.BLL.Commons;
+﻿namespace GeneralTemplate.BLL.Commons.ErrorsHandling;
 
 public record Error(string Code, string Description, int? StatusCode)
 {

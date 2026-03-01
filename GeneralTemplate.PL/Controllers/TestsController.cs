@@ -1,6 +1,4 @@
-﻿using GeneralTemplate.BLL.Services.Abstractions.Tests;
-using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace GeneralTemplate.PL.Controllers
 {
     [Route("api/[controller]")]
@@ -18,9 +16,7 @@ namespace GeneralTemplate.PL.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _testService.GetAllAsync();
-            //return result.IsSuccess ? Ok(result.Value) : BadRequest(result.Error);
-            return result.IsSuccess ? Ok(result.Value)
-                : Problem(statusCode: StatusCodes.Status400BadRequest, title: result.Error.Code, detail: result.Error.Description);
+            return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
         }
 
     }
