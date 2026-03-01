@@ -1,4 +1,6 @@
 ﻿
+using GeneralTemplate.BLL.Commons.ErrorsHandling;
+
 namespace GeneralTemplate.BLL
 {
     public static class BLLDependencyInjection
@@ -12,6 +14,10 @@ namespace GeneralTemplate.BLL
 
 
             services.AddAuthConfig(configuration);
+
+            // To Handle Exceptions
+            services.AddExceptionHandler<GlobalExceptionHandler>();
+            services.AddProblemDetails();
 
 
             return services;
