@@ -4,6 +4,7 @@ using GeneralTemplate.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GeneralTemplate.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260301122856_AddRefreshTokenTable")]
+    partial class AddRefreshTokenTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,16 +46,14 @@ namespace GeneralTemplate.DAL.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDisabled")
                         .HasColumnType("bit");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -299,7 +300,7 @@ namespace GeneralTemplate.DAL.Migrations
                 {
                     b.OwnsMany("GeneralTemplate.DAL.Entities.RefreshToken", "RefreshTokens", b1 =>
                         {
-                            b1.Property<string>("UserId")
+                            b1.Property<string>("ApplicationUserId")
                                 .HasColumnType("nvarchar(450)");
 
                             b1.Property<int>("Id")
@@ -321,12 +322,12 @@ namespace GeneralTemplate.DAL.Migrations
                                 .IsRequired()
                                 .HasColumnType("nvarchar(max)");
 
-                            b1.HasKey("UserId", "Id");
+                            b1.HasKey("ApplicationUserId", "Id");
 
-                            b1.ToTable("RefreshTokens", (string)null);
+                            b1.ToTable("RefreshToken");
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("ApplicationUserId");
                         });
 
                     b.Navigation("RefreshTokens");

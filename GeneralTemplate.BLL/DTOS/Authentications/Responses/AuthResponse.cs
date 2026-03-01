@@ -6,9 +6,9 @@
         string FirstName,
         string LastName,
          string Token,
-         int ExpireIn
-        //  string RefreshToken,
-        //  DateTime RefreshTokenExpiration*/
+         int ExpireIn,
+          string RefreshToken,
+         DateTime RefreshTokenExpiration
         );
 
 }

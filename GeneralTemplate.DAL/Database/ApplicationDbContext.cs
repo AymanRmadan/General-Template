@@ -1,4 +1,6 @@
-﻿namespace GeneralTemplate.DAL.Database
+﻿using System.Reflection;
+
+namespace GeneralTemplate.DAL.Database
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -11,7 +13,7 @@
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            base.OnModelCreating(builder);
+
 
             var user = new ApplicationUser
             {
@@ -31,6 +33,11 @@
             };
 
             builder.Entity<ApplicationUser>().HasData(user);
+
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            base.OnModelCreating(builder);
+
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using GeneralTemplate.BLL.DTOS.Logins.Request;
+﻿using GeneralTemplate.BLL.DTOS.Authentications.Requests;
+using GeneralTemplate.BLL.DTOS.Logins.Request;
 using GeneralTemplate.BLL.Services.Abstractions.AuthServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,23 @@ namespace GeneralTemplate.PL.Controllers
             //    Ok,
             //    error => Problem(statusCode: StatusCodes.Status400BadRequest, title: error.Code, detail: error.Description)
             //);
+        }
+
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
+        {
+            var authResult = await _authService.GetRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
+
+            return authResult.IsSuccess ? Ok(authResult.Value) : BadRequest("Invalid Token"); //authResult.ToProblem();
+        }
+
+        [HttpPost("revoke-refresh-token")]
+        public async Task<IActionResult> RevokeRefreshToken([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _authService.RevokeRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
+
+            return result.IsSuccess ? Ok() : BadRequest();//result.ToProblem();
         }
     }
 }

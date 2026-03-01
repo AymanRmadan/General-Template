@@ -1,6 +1,8 @@
-﻿global using GeneralTemplate.BLL.Authentications;
+﻿global using FluentValidation;
+global using GeneralTemplate.BLL.Authentications;
 global using GeneralTemplate.BLL.Commons;
 global using GeneralTemplate.BLL.Commons.Errors;
+global using GeneralTemplate.BLL.DTOS.Authentications.Requests;
 global using GeneralTemplate.BLL.DTOS.Authentications.Responses;
 global using GeneralTemplate.BLL.Services.Abstractions.AuthServices;
 global using GeneralTemplate.BLL.Services.Abstractions.Tests;
@@ -18,3 +20,4 @@ global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
 global using System.Text;
+
