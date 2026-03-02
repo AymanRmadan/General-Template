@@ -1,5 +1,4 @@
-﻿
-namespace GeneralTemplate.PL.Controllers
+﻿namespace GeneralTemplate.PL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -16,7 +15,12 @@ namespace GeneralTemplate.PL.Controllers
         public async Task<IActionResult> Get()
         {
             var result = await _testService.GetAllAsync();
-            return result.IsSuccess ? Ok(result.Value) : result.ToProblem();
+
+            if (!result.IsSuccess)
+                return result.ToProblem();
+
+            var response = result.Value.Adapt<IEnumerable<Test>>();
+            return Ok(response);
         }
 
     }

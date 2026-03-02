@@ -1,17 +1,11 @@
-using GeneralTemplate.BLL;
-using GeneralTemplate.DAL;
-using GeneralTemplate.PL;
+
 
 var builder = WebApplication.CreateBuilder(args);
-
-
-
 builder.Services.AddControllers();
+
 builder.Services.AddBLL(builder.Configuration);
 builder.Services.AddDAL(builder.Configuration);
 builder.Services.AddPL(builder.Configuration);
-
-
 
 
 

@@ -1,6 +1,8 @@
 ﻿global using FluentValidation;
+global using FluentValidation.AspNetCore;
 global using GeneralTemplate.BLL.Authentications;
 global using GeneralTemplate.BLL.Commons.Errors;
+global using GeneralTemplate.BLL.Commons.ErrorsHandling;
 global using GeneralTemplate.BLL.DTOS.Authentications.Requests;
 global using GeneralTemplate.BLL.DTOS.Authentications.Responses;
 global using GeneralTemplate.BLL.Services.Abstractions.AuthServices;
@@ -10,6 +12,8 @@ global using GeneralTemplate.BLL.Services.Implementations.JwtProviders;
 global using GeneralTemplate.BLL.Services.Implementations.Tests;
 global using GeneralTemplate.DAL.Entities;
 global using GeneralTemplate.DAL.Repository.Abstractions;
+global using Mapster;
+global using MapsterMapper;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Identity;
@@ -19,6 +23,7 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Options;
 global using Microsoft.IdentityModel.Tokens;
 global using System.IdentityModel.Tokens.Jwt;
+global using System.Reflection;
 global using System.Security.Claims;
 global using System.Text;
 

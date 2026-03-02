@@ -1,6 +1,4 @@
 ﻿
-using GeneralTemplate.BLL.Commons.ErrorsHandling;
-
 namespace GeneralTemplate.BLL
 {
     public static class BLLDependencyInjection
@@ -14,6 +12,8 @@ namespace GeneralTemplate.BLL
 
 
             services.AddAuthConfig(configuration);
+            services.AddMapsterConfig();
+            services.AddFluentValidationConfig();
 
             // To Handle Exceptions
             services.AddExceptionHandler<GlobalExceptionHandler>();
@@ -62,6 +62,23 @@ namespace GeneralTemplate.BLL
 
             return services;
         }
+
+        private static IServiceCollection AddMapsterConfig(this IServiceCollection services)
+        {
+            var config = TypeAdapterConfig.GlobalSettings;
+            config.Scan(Assembly.GetExecutingAssembly());
+            services.AddSingleton<IMapper>(new Mapper(config));
+            return services;
+        }
+
+        private static IServiceCollection AddFluentValidationConfig(this IServiceCollection services)
+        {
+            services.AddFluentValidationAutoValidation()
+                   .AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            return services;
+        }
     }
+
 
 }

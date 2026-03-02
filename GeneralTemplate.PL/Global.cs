@@ -1,6 +1,11 @@
-﻿global using GeneralTemplate.BLL.Commons.ErrorsHandling;
+﻿global using GeneralTemplate.BLL;
+global using GeneralTemplate.BLL.Commons.ErrorsHandling;
 global using GeneralTemplate.BLL.DTOS.Authentications.Requests;
 global using GeneralTemplate.BLL.DTOS.Logins.Request;
 global using GeneralTemplate.BLL.Services.Abstractions.AuthServices;
 global using GeneralTemplate.BLL.Services.Abstractions.Tests;
+global using GeneralTemplate.DAL;
+global using GeneralTemplate.DAL.Entities;
+global using GeneralTemplate.PL;
+global using Mapster;
 global using Microsoft.AspNetCore.Mvc;
