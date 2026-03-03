@@ -1,4 +1,4 @@
-﻿using GeneralTemplate.BLL.DTOS.Logins.Request;
+﻿using GeneralTemplate.BLL;
 
 namespace SurveyBasket.Contracts.Validations
 {

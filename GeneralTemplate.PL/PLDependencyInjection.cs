@@ -1,7 +1,4 @@
-﻿using GeneralTemplate.DAL.Database;
-using GeneralTemplate.DAL.Entities;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
 namespace GeneralTemplate.PL
 {
@@ -9,23 +6,12 @@ namespace GeneralTemplate.PL
     {
         public static IServiceCollection AddPL(this IServiceCollection services, IConfiguration config)
         {
-            services.AddAuthConfig(config);
             services.AddSwaggerConfig();
 
             return services;
         }
 
 
-        private static IServiceCollection AddAuthConfig(this IServiceCollection services, IConfiguration configuration)
-        {
-            services.AddIdentity<ApplicationUser, IdentityRole>().
-                 AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
-
-
-            return services;
-
-        }
 
         private static IServiceCollection AddSwaggerConfig(this IServiceCollection services)
         {

@@ -1,6 +1,4 @@
-﻿using GeneralTemplate.BLL.Commons.ErrorsHandling;
-
-namespace GeneralTemplate.BLL.Commons.Errors;
+﻿namespace GeneralTemplate.BLL.Commons.Errors;
 
 public record UserErrors
 {
@@ -18,20 +16,20 @@ public record UserErrors
 
     public static readonly Error InvalidRefreshToken =
         new("User.InvalidRefreshToken", "Invalid refresh token", 401);// StatusCodes.Status401Unauthorized);
-    /*
-     public static readonly Error DuplicatedEmail =
-         new("User.DuplicatedEmail", "Another user with the same email is already exists", StatusCodes.Status409Conflict);
 
-     public static readonly Error EmailNotConfirmed =
-         new("User.EmailNotConfirmed", "Email is not confirmed", StatusCodes.Status401Unauthorized);
+    public static readonly Error DuplicatedEmail =
+        new("User.DuplicatedEmail", "Another user with the same email is already exists", StatusCodes.Status409Conflict);
 
-     public static readonly Error InvalidCode =
-         new("User.InvalidCode", "Invalid code", StatusCodes.Status401Unauthorized);
+    public static readonly Error EmailNotConfirmed =
+        new("User.EmailNotConfirmed", "Email is not confirmed", StatusCodes.Status401Unauthorized);
 
-     public static readonly Error DuplicatedConfirmation =
-         new("User.DuplicatedConfirmation", "Email already confirmed", StatusCodes.Status400BadRequest);
+    public static readonly Error InvalidCode =
+        new("User.InvalidCode", "Invalid code", StatusCodes.Status401Unauthorized);
 
-     public static readonly Error UserNotFound =
+    public static readonly Error DuplicatedConfirmation =
+        new("User.DuplicatedConfirmation", "Email already confirmed", StatusCodes.Status400BadRequest);
+
+    /* public static readonly Error UserNotFound =
      new("User.UserNotFound", "User is not found", StatusCodes.Status404NotFound);
 
      public static readonly Error InvalidRoles =

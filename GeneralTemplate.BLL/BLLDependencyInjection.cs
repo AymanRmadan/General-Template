@@ -1,4 +1,6 @@
 ﻿
+using GeneralTemplate.DAL.Database;
+
 namespace GeneralTemplate.BLL
 {
     public static class BLLDependencyInjection
@@ -8,8 +10,10 @@ namespace GeneralTemplate.BLL
         {
             services.AddScoped<ITestService, TestService>();
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IJwtProvider, JwtProvider>();
+            services.AddSingleton<IJwtProvider, JwtProvider>();
+            services.AddScoped<IEmailSender, EmailService>();
 
+            services.AddHttpContextAccessor();
 
             services.AddAuthConfig(configuration);
             services.AddMapsterConfig();
@@ -20,6 +24,13 @@ namespace GeneralTemplate.BLL
             services.AddProblemDetails();
 
 
+            services.Configure<MailSettings>(configuration.GetSection(nameof(MailSettings)));
+            /*  services.AddOptions<MailSettings>()
+                   .BindConfiguration(nameof(MailSettings))
+                   .ValidateDataAnnotations()
+                   .ValidateOnStart();*/
+
+
             return services;
         }
 
@@ -28,12 +39,16 @@ namespace GeneralTemplate.BLL
 
         private static IServiceCollection AddAuthConfig(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddIdentity<ApplicationUser, IdentityRole>().
+            AddEntityFrameworkStores<ApplicationDbContext>()
+           .AddDefaultTokenProviders();
+
+
             // services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
             services.AddOptions<JwtOptions>()
                   .BindConfiguration("Jwt")
                   .ValidateDataAnnotations()
                   .ValidateOnStart();
-
 
             var jwtSetting = configuration.GetSection("Jwt").Get<JwtOptions>();
 
@@ -59,6 +74,12 @@ namespace GeneralTemplate.BLL
                }
                );
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.SignIn.RequireConfirmedEmail = true;
+                options.User.RequireUniqueEmail = true;
+            });
 
             return services;
         }

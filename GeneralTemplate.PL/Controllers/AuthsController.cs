@@ -1,4 +1,4 @@
-﻿
+﻿using GeneralTemplate.BLL.DTOS.Register.Requests;
 
 namespace GeneralTemplate.PL.Controllers
 {
@@ -24,6 +24,32 @@ namespace GeneralTemplate.PL.Controllers
             //    error => Problem(statusCode: StatusCodes.Status400BadRequest, title: error.Code, detail: error.Description)
             //);
         }
+
+        [HttpPost("register")]
+        // [DisableRateLimiting]
+        public async Task<IActionResult> Register([FromBody] AddRegisterRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _authService.RegisterAsync(request, cancellationToken);
+
+            return result.IsSuccess ? Ok() : result.ToProblem();
+        }
+
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _authService.ConfirmEmailAsync(request);
+
+            return result.IsSuccess ? Ok() : result.ToProblem();
+        }
+
+        [HttpPost("resend-confirmation-email")]
+        public async Task<IActionResult> ResendConfirmationEmail([FromBody] AddResendConfirmationEmailRequest request, CancellationToken cancellationToken)
+        {
+            var result = await _authService.ResendConfirmationEmailAsync(request);
+
+            return result.IsSuccess ? Ok() : result.ToProblem();
+        }
+
 
 
         [HttpPost("refresh")]

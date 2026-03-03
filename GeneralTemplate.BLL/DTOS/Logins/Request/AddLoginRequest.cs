@@ -1,4 +1,4 @@
-﻿namespace GeneralTemplate.BLL.DTOS.Logins.Request
+﻿namespace GeneralTemplate.BLL
 {
     public record AddLoginRequest(
         string Email,
