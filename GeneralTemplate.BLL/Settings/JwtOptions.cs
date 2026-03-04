@@ -1,7 +1,7 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace GeneralTemplate.BLL.Authentications;
+namespace GeneralTemplate.BLL;
 
 public class JwtOptions
 {

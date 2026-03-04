@@ -1,6 +1,5 @@
 ﻿global using FluentValidation;
 global using FluentValidation.AspNetCore;
-global using GeneralTemplate.BLL.Authentications;
 global using GeneralTemplate.BLL.Commons.Errors;
 global using GeneralTemplate.BLL.Commons.ErrorsHandling;
 global using GeneralTemplate.BLL.DTOS.Authentications.Requests;

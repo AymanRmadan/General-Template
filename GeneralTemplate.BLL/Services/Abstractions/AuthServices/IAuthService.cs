@@ -1,6 +1,4 @@
-﻿using GeneralTemplate.BLL.DTOS.Register.Requests;
-
-namespace GeneralTemplate.BLL.Services.Abstractions.AuthServices
+﻿namespace GeneralTemplate.BLL.Services.Abstractions.AuthServices
 {
     public interface IAuthService
     {
@@ -12,6 +10,9 @@ namespace GeneralTemplate.BLL.Services.Abstractions.AuthServices
 
         Task<Result> ConfirmEmailAsync(ConfirmEmailRequest request);
         Task<Result> ResendConfirmationEmailAsync(AddResendConfirmationEmailRequest request);
+
+        Task<Result> SendResetPasswordCodeAsync(string email);
+        Task<Result> ResetPasswordAsync(ResetPasswordRequest request);
     }
 
 }

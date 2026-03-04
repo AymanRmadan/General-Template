@@ -2,7 +2,7 @@
 
 namespace GeneralTemplate.PL.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthsController : ControllerBase
     {
@@ -12,7 +12,7 @@ namespace GeneralTemplate.PL.Controllers
             _authService = authService;
         }
 
-        [HttpPost("")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AddLoginRequest request, CancellationToken cancellationToken)
         {
             var authResult = await _authService.GetTokenAsync(request.Email, request.Password, cancellationToken);
@@ -64,6 +64,22 @@ namespace GeneralTemplate.PL.Controllers
         public async Task<IActionResult> RevokeRefreshToken([FromBody] RefreshTokenRequest request, CancellationToken cancellationToken)
         {
             var result = await _authService.RevokeRefreshTokenAsync(request.Token, request.RefreshToken, cancellationToken);
+
+            return result.IsSuccess ? Ok() : result.ToProblem();
+        }
+
+        [HttpPost("forget-password")]
+        public async Task<IActionResult> ForgetPassword([FromBody] ForgetPasswordRequest request)
+        {
+            var result = await _authService.SendResetPasswordCodeAsync(request.Email);
+
+            return result.IsSuccess ? Ok() : result.ToProblem();
+        }
+
+        [HttpPost("reset-password")]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            var result = await _authService.ResetPasswordAsync(request);
 
             return result.IsSuccess ? Ok() : result.ToProblem();
         }

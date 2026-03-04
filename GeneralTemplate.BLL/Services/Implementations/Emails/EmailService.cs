@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Logging;
 using MimeKit;
 
-namespace GeneralTemplate.BLL;
+namespace GeneralTemplate.BLL.Services.Implementations.Emails;
 public class EmailService(IOptions<MailSettings> mailSettings, ILogger<EmailService> logger) : IEmailSender
 {
     private readonly MailSettings _mailSettings = mailSettings.Value;
