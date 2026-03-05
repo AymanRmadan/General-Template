@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace GeneralTemplate.DAL.Entities
+﻿namespace GeneralTemplate.DAL.Entities.Auths
 {
     public sealed class ApplicationUser : IdentityUser
     {

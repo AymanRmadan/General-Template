@@ -1,14 +1,12 @@
 ﻿global using FluentValidation;
 global using FluentValidation.AspNetCore;
 global using GeneralTemplate.BLL.Commons.Errors;
-global using GeneralTemplate.BLL.Commons.ErrorsHandling;
 global using GeneralTemplate.BLL.DTOS.Authentications.Requests;
 global using GeneralTemplate.BLL.DTOS.Authentications.Responses;
 global using GeneralTemplate.BLL.DTOS.Register.Requests;
 global using GeneralTemplate.BLL.Services.Abstractions.AuthServices;
 global using GeneralTemplate.BLL.Services.Abstractions.Tests;
 global using GeneralTemplate.BLL.Services.Implementations.AuthServices;
-global using GeneralTemplate.BLL.Services.Implementations.JwtProviders;
 global using GeneralTemplate.BLL.Services.Implementations.Tests;
 global using GeneralTemplate.DAL.Entities;
 global using GeneralTemplate.DAL.Repository.Abstractions;

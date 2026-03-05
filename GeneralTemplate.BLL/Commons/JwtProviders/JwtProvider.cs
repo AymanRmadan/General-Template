@@ -1,4 +1,7 @@
-﻿namespace GeneralTemplate.BLL.Services.Implementations.JwtProviders;
+﻿using GeneralTemplate.DAL.Entities.Auths;
+using System.Text.Json;
+
+namespace GeneralTemplate.BLL;
 
 public class JwtProvider : IJwtProvider
 {
@@ -9,7 +12,7 @@ public class JwtProvider : IJwtProvider
         _options = options.Value;
     }
 
-    public (string token, int expiresIn) GenerateToken(ApplicationUser user)//, IEnumerable<string> roles, IEnumerable<string> permissions)
+    public (string token, int expiresIn) GenerateToken(ApplicationUser user, IEnumerable<string> roles)//, IEnumerable<string> permissions)
     {
         Claim[] claims = [
             new(JwtRegisteredClaimNames.Sub, user.Id),
@@ -17,7 +20,7 @@ public class JwtProvider : IJwtProvider
             new(JwtRegisteredClaimNames.GivenName, user.FirstName),
             new(JwtRegisteredClaimNames.FamilyName, user.LastName),
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-          //  new(nameof(roles), JsonSerializer.Serialize(roles), JsonClaimValueTypes.JsonArray),
+           new(nameof(roles), JsonSerializer.Serialize(roles), JsonClaimValueTypes.JsonArray),
           //  new(nameof(permissions), JsonSerializer.Serialize(permissions), JsonClaimValueTypes.JsonArray)
         ];
 

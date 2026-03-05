@@ -1,6 +1,4 @@
-﻿using GeneralTemplate.BLL.Commons.ErrorsHandling;
-
-namespace GeneralTemplate.BLL.Services.Abstractions.Tests
+﻿namespace GeneralTemplate.BLL.Services.Abstractions.Tests
 {
     public interface ITestService
     {

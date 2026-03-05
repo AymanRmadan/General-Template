@@ -1,4 +1,4 @@
-﻿namespace GeneralTemplate.DAL.Entities
+﻿namespace GeneralTemplate.DAL.Entities.Auths
 {
     [Owned]
     public class RefreshToken

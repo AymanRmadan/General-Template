@@ -1,4 +1,6 @@
-﻿
+﻿using GeneralTemplate.DAL;
+using GeneralTemplate.DAL.Entities.Auths;
+
 namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
 {
     public class AuthService : IAuthService
@@ -38,9 +40,9 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
 
             if (result.Succeeded)
             {
-                // var (userRoles, userPermissions) = await GetUserRolesAndPermissions(user, cancellationToken);
+                var userRoles = await _userManager.GetRolesAsync(user);
 
-                var (token, expiresIn) = _jwtProvider.GenerateToken(user);//, userRoles, userPermissions);
+                var (token, expiresIn) = _jwtProvider.GenerateToken(user, userRoles);
                 var refreshToken = GenerateRefreshToken();
                 var refreshTokenExpiration = DateTime.UtcNow.AddDays(_refreshTokenExpiryDays);
 
@@ -126,7 +128,7 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
 
             if (result.Succeeded)
             {
-                //  await _userManager.AddToRoleAsync(user, DefaultRoles.Member);
+                await _userManager.AddToRoleAsync(user, DefaultRoles.Member);
                 return Result.Success();
             }
 
@@ -181,9 +183,8 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
 
             userRefrshToken.RevokedOn = DateTime.UtcNow;
 
-
-            // var (userRoles, userPermissions) = await GetUserRolesAndPermissions(user, cancellation);
-            var (newToken, expireIn) = _jwtProvider.GenerateToken(user);//, userRoles, userPermissions);
+            var userRoles = await _userManager.GetRolesAsync(user);
+            var (newToken, expireIn) = _jwtProvider.GenerateToken(user, userRoles);
 
             var newRefreshToken = GenerateRefreshToken();
             var refreshTokenExpiration = DateTime.UtcNow.AddDays(_refreshTokenExpiryDays);

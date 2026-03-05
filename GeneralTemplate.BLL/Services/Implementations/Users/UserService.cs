@@ -1,4 +1,5 @@
 ﻿using GeneralTemplate.DAL.Database;
+using GeneralTemplate.DAL.Entities.Auths;
 
 namespace GeneralTemplate.BLL
 {

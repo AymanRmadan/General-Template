@@ -1,6 +1,6 @@
-﻿
-using GeneralTemplate.BLL.Services.Implementations.Emails;
+﻿using GeneralTemplate.BLL.Services.Implementations.Emails;
 using GeneralTemplate.DAL.Database;
+using GeneralTemplate.DAL.Entities.Auths;
 
 namespace GeneralTemplate.BLL
 {
@@ -44,7 +44,7 @@ namespace GeneralTemplate.BLL
 
         private static IServiceCollection AddAuthConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddIdentity<ApplicationUser, IdentityRole>().
+            services.AddIdentity<ApplicationUser, ApplicationRole>().
             AddEntityFrameworkStores<ApplicationDbContext>()
            .AddDefaultTokenProviders();
 

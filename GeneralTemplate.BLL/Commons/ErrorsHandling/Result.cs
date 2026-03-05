@@ -1,4 +1,4 @@
-﻿namespace GeneralTemplate.BLL.Commons.ErrorsHandling;
+﻿namespace GeneralTemplate.BLL;
 public class Result
 {
     public Result(bool isSuccess, Error error)

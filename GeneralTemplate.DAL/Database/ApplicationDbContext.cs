@@ -1,8 +1,9 @@
-﻿using System.Reflection;
+﻿using GeneralTemplate.DAL.Entities.Auths;
+using System.Reflection;
 
 namespace GeneralTemplate.DAL.Database
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

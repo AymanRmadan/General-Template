@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Extensions.Logging;
 
-namespace GeneralTemplate.BLL.Commons.ErrorsHandling
+namespace GeneralTemplate.BLL
 {
     public class GlobalExceptionHandler(ILogger<GlobalExceptionHandler> logger) : IExceptionHandler
     {
