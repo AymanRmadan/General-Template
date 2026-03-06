@@ -1,4 +1,4 @@
-﻿using GeneralTemplate.BLL.Services.Implementations.Emails;
+﻿using GeneralTemplate.BLL.Services.Implementations.AuthServices.Emails;
 using GeneralTemplate.DAL.Database;
 using GeneralTemplate.DAL.Entities.Auths;
 
@@ -13,10 +13,6 @@ namespace GeneralTemplate.BLL
             services.AddScoped<IAuthService, AuthService>();
             services.AddSingleton<IJwtProvider, JwtProvider>();
             services.AddScoped<IEmailSender, EmailService>();
-
-            services.AddScoped<IUserService, UserService>();
-            // services.AddScoped<ICacheService, CacheService>();
-            //services.AddScoped<IRoleService, RoleService>();
 
             services.AddHttpContextAccessor();
 

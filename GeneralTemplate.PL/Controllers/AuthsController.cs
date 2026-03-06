@@ -68,6 +68,14 @@ namespace GeneralTemplate.PL.Controllers
             return result.IsSuccess ? Ok() : result.ToProblem();
         }
 
+        [HttpPut("change-password")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+        {
+            var result = await _authService.ChangePasswordAsync(User.GetUserId()!, request);
+
+            return result.IsSuccess ? NoContent() : result.ToProblem();
+        }
+
         [HttpPost("forget-password")]
         public async Task<IActionResult> ForgetPassword([FromBody] ForgetPasswordRequest request)
         {

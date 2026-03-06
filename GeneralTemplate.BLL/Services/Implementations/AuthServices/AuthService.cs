@@ -32,10 +32,10 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
             var user = await _userManager.FindByEmailAsync(email);
             if (user is null)
                 return Result.Failure<AuthResponse>(UserErrors.InvalidCredentials);
-            /*
-                        if (user.IsDisabled)
-                            return Result.Failure<AuthResponse>(UserErrors.DisabledUser);
-            */
+
+            if (user.IsDisabled)
+                return Result.Failure<AuthResponse>(UserErrors.DisabledUser);
+
             var result = await _signInManager.PasswordSignInAsync(user, password, false, true);
 
             if (result.Succeeded)
@@ -56,16 +56,15 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
                 var response = new AuthResponse(user.Id, user.Email, user.FirstName, user.LastName, token, expiresIn * 60, refreshToken, refreshTokenExpiration);
                 return Result.Success(response);
             }
-            /*
-                        var error = result.IsNotAllowed
-                        ? UserErrors.EmailNotConfirmed
-                        : result.IsLockedOut
-                        ? UserErrors.LockedUser
-                        : UserErrors.InvalidCredentials;*/
 
-            // return Result.Failure<AuthResponse>(");
-            //  return null;
-            return Result.Failure<AuthResponse>(result.IsNotAllowed ? UserErrors.EmailNotConfirmed : UserErrors.InvalidCredentials);
+            var error = result.IsNotAllowed
+            ? UserErrors.EmailNotConfirmed
+            : result.IsLockedOut
+            ? UserErrors.LockedUser
+            : UserErrors.InvalidCredentials;
+
+            return Result.Failure<AuthResponse>(error);
+
         }
         public async Task<Result> RegisterAsync(AddRegisterRequest request, CancellationToken cancellationToken = default)
         {
@@ -171,11 +170,11 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
             if (user is null)
                 return Result.Failure<AuthResponse>(UserErrors.InvalidCredentials);
 
-            /*  if (user.IsDisabled)
-                  return Result.Failure<AuthResponse>(UserErrors.DisabledUser);
+            if (user.IsDisabled)
+                return Result.Failure<AuthResponse>(UserErrors.DisabledUser);
 
-              if (user.LockoutEnd > DateTime.UtcNow)
-                  return Result.Failure<AuthResponse>(UserErrors.LockedUser);*/
+            if (user.LockoutEnd > DateTime.UtcNow)
+                return Result.Failure<AuthResponse>(UserErrors.LockedUser);
 
             var userRefrshToken = user.RefreshTokens.SingleOrDefault(x => x.Token == refreshToken && x.IsActive);
             if (userRefrshToken is null)
@@ -228,6 +227,19 @@ namespace GeneralTemplate.BLL.Services.Implementations.AuthServices
 
 
 
+        // This method when i have my password but i need to change it
+        public async Task<Result> ChangePasswordAsync(string userId, ChangePasswordRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var result = await _userManager.ChangePasswordAsync(user!, request.CurrentPassword, request.NewPassword);
+
+            if (result.Succeeded)
+                return Result.Success();
+
+            var error = result.Errors.First();
+            return Result.Failure(new Error(error.Code, error.Description, StatusCodes.Status400BadRequest));
+        }
         public async Task<Result> SendResetPasswordCodeAsync(string email)
         {
             // miss leading ==> to hacker

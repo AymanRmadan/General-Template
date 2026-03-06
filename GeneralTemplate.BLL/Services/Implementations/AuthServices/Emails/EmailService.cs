@@ -1,10 +1,8 @@
 ﻿using MailKit.Net.Smtp;
 using MailKit.Security;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Logging;
 using MimeKit;
 
-namespace GeneralTemplate.BLL.Services.Implementations.Emails;
+namespace GeneralTemplate.BLL.Services.Implementations.AuthServices.Emails;
 public class EmailService(IOptions<MailSettings> mailSettings, ILogger<EmailService> logger) : IEmailSender
 {
     private readonly MailSettings _mailSettings = mailSettings.Value;

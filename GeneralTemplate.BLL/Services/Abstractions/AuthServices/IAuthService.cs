@@ -11,6 +11,7 @@
         Task<Result> ConfirmEmailAsync(ConfirmEmailRequest request);
         Task<Result> ResendConfirmationEmailAsync(AddResendConfirmationEmailRequest request);
 
+        Task<Result> ChangePasswordAsync(string userId, ChangePasswordRequest request);
         Task<Result> SendResetPasswordCodeAsync(string email);
         Task<Result> ResetPasswordAsync(ResetPasswordRequest request);
     }
