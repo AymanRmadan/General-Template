@@ -1,4 +1,7 @@
-﻿namespace GeneralTemplate.BLL.Services.Abstractions.AuthServices
+﻿using GeneralTemplate.BLL.Commons.ResponseResults;
+using GeneralTemplate.BLL.DTOS.Passwords.Requests;
+
+namespace GeneralTemplate.BLL.Services.Abstractions.AuthServices
 {
     public interface IAuthService
     {

@@ -1,4 +1,6 @@
-﻿using GeneralTemplate.BLL.DTOS.Register.Requests;
+﻿using GeneralTemplate.BLL.Commons.ResponseResults;
+using GeneralTemplate.BLL.DTOS.Passwords.Requests;
+using GeneralTemplate.BLL.DTOS.Register.Requests;
 
 namespace GeneralTemplate.PL.Controllers
 {

@@ -1,4 +1,4 @@
-﻿namespace GeneralTemplate.BLL
+﻿namespace GeneralTemplate.BLL.Commons.ResponseResults
 {
     public static class ResultExtensions
     {

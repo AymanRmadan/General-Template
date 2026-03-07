@@ -1,8 +1,8 @@
 ﻿namespace GeneralTemplate.DAL.Entities
 {
-    public class BaseEntity
+    public class BaseEntity<Key>
     {
-        public int Id { get; private set; }
+        public Key Id { get; private set; }
 
         public DateTime CreatedOn { get; private set; }
         public DateTime? UpdatedOn { get; private set; }

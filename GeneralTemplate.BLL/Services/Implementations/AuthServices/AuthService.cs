@@ -1,4 +1,6 @@
-﻿using GeneralTemplate.DAL;
+﻿using GeneralTemplate.BLL.Commons.ResponseResults;
+using GeneralTemplate.BLL.DTOS.Passwords.Requests;
+using GeneralTemplate.DAL;
 using GeneralTemplate.DAL.Entities.Auths;
 
 namespace GeneralTemplate.BLL.Services.Implementations.AuthServices

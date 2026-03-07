@@ -1,4 +1,6 @@
-﻿namespace GeneralTemplate.BLL.Services.Abstractions.Tests
+﻿using GeneralTemplate.BLL.Commons.ResponseResults;
+
+namespace GeneralTemplate.BLL.Services.Abstractions.Tests
 {
     public interface ITestService
     {

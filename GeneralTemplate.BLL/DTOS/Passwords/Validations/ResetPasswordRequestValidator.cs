@@ -1,4 +1,6 @@
-﻿namespace GeneralTemplate.BLL;
+﻿using GeneralTemplate.BLL.DTOS.Passwords.Requests;
+
+namespace GeneralTemplate.BLL.DTOS.Passwords.Validations;
 
 public class ResetPasswordRequestValidator : AbstractValidator<ResetPasswordRequest>
 {

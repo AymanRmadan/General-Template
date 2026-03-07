@@ -1,4 +1,6 @@
-﻿namespace GeneralTemplate.PL.Controllers
+﻿using GeneralTemplate.BLL.Commons.ResponseResults;
+
+namespace GeneralTemplate.PL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
